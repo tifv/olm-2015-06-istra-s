@@ -1,0 +1,198 @@
+$target$able: off
+
+$style:
+
+- document class: article
+  options: [a4paper,10pt]
+  condition: {not: no-document-class}
+- package: inputenc
+  options: [utf8]
+  condition: {or: [compiler-latex, compiler-pdflatex]}
+- delegate: font-config
+  condition: {not: no-font-config}
+
+- delegate: jeolm
+
+- delegate: math-font-config
+  condition: {not: no-font-config}
+- delegate: language-config
+  condition: {not: no-language-config}
+- verbatim: '\pagestyle{empty}'
+  provide: pagestyle
+  condition: {not: no-pagestyle}
+
+- delegate: optional
+
+font-config:
+  $style[compiler-latex]:
+  - delegate: fontenc
+  $style[compiler-pdflatex]:
+  - delegate: fontenc
+  $style[compiler-xelatex]:
+  - delegate: fontspec
+  $style[compiler-lualatex]:
+  - delegate: fontspec
+
+  fontenc:
+    $style:
+    - package: fontenc
+      options: [T2A]
+
+  fontspec:
+    $style:
+    - package: xparse
+      options: [log-declarations=false]
+    - package: fontspec
+      options: [no-math]
+    - verbatim:
+        \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+    - delegate: setfont/cm-unicode
+    setfont:
+      cm-unicode:
+        $style:
+        - verbatim: |-
+            \setmainfont[
+              Path = /usr/share/texmf-dist/fonts/opentype/public/cm-unicode/,
+              Extension=.otf,
+              BoldFont=cmunbx, ItalicFont=cmunti, BoldItalicFont=cmunbi,
+              SlantedFont=cmunsl,
+              SmallCapsFont=cmunrm, SmallCapsFeatures={Letters=SmallCaps},
+            ]{cmunrm}
+            \let\cyrillicfont\normalfont
+          provide: setmainfont
+        - verbatim: |-
+            \setsansfont[
+              Path = /usr/share/texmf-dist/fonts/opentype/public/cm-unicode/,
+              Extension=.otf,
+              BoldFont=cmunsx, ItalicFont=cmunsi, BoldItalicFont=cmunso,
+            ]{cmunss}
+            \let\cyrillicfontsf\sffamily
+          provide: setsansfont
+        - verbatim: |-
+            \setmonofont[
+              Path = /usr/share/texmf-dist/fonts/opentype/public/cm-unicode/,
+              Extension=.otf,
+              BoldFont=cmuntb, ItalicFont=cmunit, BoldItalicFont=cmuntx,
+              SlantedFont=cmunst,
+            ]{cmuntt}
+            \let\cyrillicfonttt\ttfamily
+          provide: setmonofont
+
+math-font-config:
+  $style[compiler-latex]: []
+  $style[compiler-pdflatex]: []
+  $style[compiler-lualatex]: []
+  $style[compiler-xelatex]: []
+
+  unicode-math:
+    $style:
+    - package: unicode-math
+      options:
+      - vargreek-shape=unicode
+    - verbatim: |-
+        \setmathfont{latinmodern-math.otf}
+      provide: setmathfont
+
+language-config:
+  $style[compiler-latex]:
+  - babel
+  $style[compiler-pdflatex]:
+  - babel
+  $style[compiler-xelatex]:
+  - polyglossia
+  $style[compiler-lualatex]:
+  - polyglossia
+
+  babel:
+    $style:
+    - package: babel
+      options: [russian]
+
+  polyglossia:
+    $style:
+    - package: polyglossia
+    - verbatim: \setdefaultlanguage{russian}
+      provide: setdefaultlanguage
+
+jeolm:
+  $target$able: on
+  $build$compiler$default: pdflatex
+
+optional:
+  $style:
+  - delegate: ./geometry
+    condition: {not: no-geometry}
+  - package: parskip
+    condition: {not: no-parskip}
+  - delegate: ./pgfpages
+    condition: {not: no-pgfpages}
+  - delegate: ./shrink-formulas
+    condition: shrink-formulas
+  $style[print,-tiled4]:
+  - delegate: .[-print]
+    condition: {or: [resize-to, 2-on-1, 4-on-1]}
+  - delegate: .[2-on-1,-print]
+    condition: {not: {or: [resize-to, 2-on-1, 4-on-1]}}
+  $style[print,tiled4]:
+  - .[-print]
+  $style[tiled4,-print]:
+  - .[a6paper,landscape,4-on-1,-tiled4]
+  geometry:
+    $style:
+    - package: geometry
+    - delegate: set-paper-size
+    - verbatim: '\geometry{vmargin={2em,2em},hmargin={2em,2em}}'
+      provide: geometry:margin
+    - verbatim: '\geometry{landscape}'
+      provide: geometry:landscape
+      condition: landscape
+    set-paper-size:
+      $style[a6paper]:
+      - verbatim: '\geometry{a6paper}'
+        provide: geometry:paper
+      $style[a5paper]:
+      - verbatim: '\geometry{a5paper}'
+        provide: geometry:paper
+      $style[a4paper]:
+      - verbatim: '\geometry{a4paper}'
+        provide: geometry:paper
+      $style[a3paper]:
+      - verbatim: '\geometry{a3paper}'
+        provide: geometry:paper
+      $style: # default
+      - .[a5paper]
+  pgfpages:
+    $style[-resize-to,-2-on-1,-4-on-1]: []
+    $style:
+    - package: pgfpages
+    - verbatim: |-
+        \renewcommand\pgfsetupphysicalpagesizes{% fix for xelatex
+          \pdfpagewidth\pgfphysicalwidth\pdfpageheight\pgfphysicalheight}
+      condition: compiler-xelatex
+    - delegate: uselayout
+    uselayout:
+      $style[resize-to,-landscape]:
+      - verbatim: '\pgfpagesuselayout{resize to}[a4paper]'
+        provide: pgfpagesuselayout
+      $style[2-on-1,-landscape]:
+      - verbatim: '\pgfpagesuselayout{2 on 1}[a4paper,landscape]'
+        provide: pgfpagesuselayout
+      $style[4-on-1,-landscape]:
+      - verbatim: '\pgfpagesuselayout{4 on 1}[a4paper]'
+        provide: pgfpagesuselayout
+      $style[resize-to,landscape]:
+      - verbatim: '\pgfpagesuselayout{resize to}[a4paper,landscape]'
+        provide: pgfpagesuselayout
+      $style[2-on-1,landscape]:
+      - verbatim: '\pgfpagesuselayout{2 on 1}[a4paper]'
+        provide: pgfpagesuselayout
+      $style[4-on-1,landscape]:
+      - verbatim: '\pgfpagesuselayout{4 on 1}[a4paper,landscape]'
+        provide: pgfpagesuselayout
+      $style: [] # default
+  shrink-formulas:
+    $style:
+    - verbatim: |-
+        \AtBeginDocument{\abovedisplayskip=10pt minus 7pt}
+        \AtBeginDocument{\belowdisplayskip=\abovedisplayskip}
+

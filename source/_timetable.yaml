@@ -1,0 +1,17 @@
+!!omap
+
+- $large$timetable$extra[g9]: true
+- $timetable$extra[g9]: {}
+
+- $large$timetable$extra[g10r2]: true
+- $timetable$extra[g10r2]: {}
+
+- $large$timetable$extra[g10r1]: true
+- $timetable$extra[g10r1]: {}
+
+- $large$timetable$extra[g11r2]: true
+- $timetable$extra[g11r2]: {}
+
+- $large$timetable$extra[g11r1]: true
+- $timetable$extra[g11r1]: {}
+

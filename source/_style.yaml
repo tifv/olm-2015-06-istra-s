@@ -1,0 +1,14 @@
+$build$compiler$default: pdflatex
+$style:
+- delegate: /_style
+- delegate: /_style/local
+  condition: {not: no-style-local}
+- verbatim: |-
+    \newcommand\jeolminstitutionname
+        {{\upshape[}\/Московские сборы по математике{\upshape\/]}}
+    \newcommand\jeolmdaterange
+        {{\upshape[}\/15 июня -- 28 июня 2015{\upshape\/]}}
+
+_style:
+  $groups$delegate: false
+
