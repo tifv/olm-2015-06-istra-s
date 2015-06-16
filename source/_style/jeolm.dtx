@@ -232,7 +232,7 @@
     \rlap{\raisebox{ 0.20\@kratno@height}{$\mathsurround=0pt#1.$}}%
           \raisebox{ 0.50\@kratno@height}{$\mathsurround=0pt#1.$}%
     }}
-\def\kratno{\mathchoice%
+\newcommand{\kratno}{\mathchoice%
     {\@kratno@template{\displaystyle}{\tf@size}}%
     {\@kratno@template{\textstyle}{\tf@size}}%
     {\@kratno@template{\scriptstyle}{\sf@size}}%
@@ -243,6 +243,16 @@
 % Just convenient definitions.
 %    \begin{macrocode}
 \let\ov\overline
+%    \end{macrocode}
+%
+% Allow swapping of greek letters with their variants.
+%    \begin{macrocode}
+\newcommand\swapvargreek[1]{\begingroup
+\expandafter\let\expandafter\swap\csname #1\endcsname
+\expandafter\let\expandafter\varswap\csname var#1\endcsname
+\global\expandafter\let\csname #1\endcsname\varswap
+\global\expandafter\let\csname var#1\endcsname\swap
+\endgroup}
 %    \end{macrocode}
 %
 % This macro will work only on the second run, when the label is substituted.

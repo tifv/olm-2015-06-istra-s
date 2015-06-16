@@ -79,10 +79,15 @@ font-config:
           provide: setmonofont
 
 math-font-config:
-  $style[compiler-latex]: []
-  $style[compiler-pdflatex]: []
+  $style[compiler-latex]: [swap-vargreek]
+  $style[compiler-pdflatex]: [swap-vargreek]
   $style[compiler-lualatex]: []
   $style[compiler-xelatex]: []
+
+  swap-vargreek:
+    $style:
+    - verbatim:
+        \swapvargreek{phi} \swapvargreek{epsilon} \swapvargreek{kappa}
 
   unicode-math:
     $style:
