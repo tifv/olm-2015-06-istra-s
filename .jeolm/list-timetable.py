@@ -38,8 +38,6 @@ def main(listed_groups, *, driver,
                     extra = "<YELLOW>{}<RESET>".format(extra)
                 group_timetable[date][period].append(extra)
     for metapath, metarecord, group, date, period in driver.list_timetable():
-        #if not metarecord.get('$list-timetable$able', True):
-        #    continue
         timetable[group][date][period].append(
             "<GREEN>{caption}<RESET> by <CYAN>{authors}<RESET> ({metapath})"
             .format(
