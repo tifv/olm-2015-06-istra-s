@@ -135,6 +135,24 @@ font-config:
               \setmonofont{Liberation Mono}
               \let\cyrillicfonttt\ttfamily
             provide: setmonofont
+      tinos:
+        $style:
+        - verbatim: |-
+            \setmainfont{Tinos}
+            \let\cyrillicfont\normalfont
+          provide: setmainfont
+      arimo:
+        $style:
+        - verbatim: |-
+            \setsansfont{Arimo}
+            \let\cyrillicfontsf\sffamily
+          provide: setsansfont
+      cousine:
+        $style:
+        - verbatim: |-
+            \setmonofont{Cousine}
+            \let\cyrillicfonttt\ttfamily
+          provide: setmonofont
 
 math-font-config:
   $style[compiler-latex]:
