@@ -1,0 +1,120 @@
+% $date: 2015-06-18
+% $timetable:
+%   g10r1:
+%     2015-06-18:
+%       2:
+
+\section*{Неравенство Коши--Буняковского}
+
+% $authors:
+% - Александр Храбров
+
+%\claim{Неравенство Коши--Буняковского}
+Для любых вещественных чисел
+$x_1, x_2, \ldots, x_n, y_1, y_2, \ldots, y_n$ справедливо
+\emph{неравенство Коши--Буняковского:}
+\[
+    (x_1 y_1 + x_2 y_2 + \ldots + x_n y_n)^2
+\leq
+    (x_1^2 + x_2^2 + \ldots + x_n^2) \cdot
+    (y_1^2 + y_2^2 + \ldots + y_n^2)
+\, , \]
+причем если не~все $y_k$ равны нулю, то~равенство достигается тогда и~только
+тогда, когда
+\(
+    \frac{x_1}{y_1} = \frac{x_2}{y_2} = \ldots = \frac{x_n}{y_n}
+\)
+(здесь наличие нуля в~знаменателе означает, что над ним в~числителе также
+стоит ноль).
+
+\begin{problems}
+
+\item
+Пусть $a_1, a_2, \ldots, a_n, b_1, b_2, \ldots, b_n > 0$.
+Докажите, что
+\begin{flalign*}
+& \subproblemmath
+    (a_1 b_1 + a_2 b_2 + \ldots + a_n b_n)
+    \cdot
+    \left(
+        \frac{a_1}{b_1} + \frac{a_2}{b_2} +
+        \ldots +
+        \frac{a_n}{b_n}
+    \right)
+\geq
+    (a_1 + \ldots + a_n)^2
+\, ; & \\
+& \subproblemmath
+    \frac{a_1^2}{b_1} + \frac{a_2^2}{b_2} + \ldots + \frac{a_n^2}{b_n}
+\geq
+    \frac{(a_1 + a_2 + \ldots + a_n)^2}{b_1 + b_2 + \ldots + b_n}
+\; . & \end{flalign*}
+
+\item
+Для любых положительных чисел $x_1, x_2, \ldots, x_n$ докажите неравенство
+\[
+    (x_1^2 + \ldots + x_n^2)
+    \cdot
+    \left(
+        \frac{1}{x_1^2 + x_1 x_2} +
+        \frac{1}{x_2^2 + x_2 x_3} +
+        \ldots +
+        \frac{1}{x_n^2 + x_n x_1}
+    \right)
+\geq
+    \frac{n^2}{2}
+\; . \]
+
+\item
+Для положительных $a$, $b$ и~$c$ докажите неравенство
+\begin{equation*}
+    \frac{a^3}{a^2 + a b + b^2} +
+    \frac{b^3}{b^2 + b c + c^2} +
+    \frac{c^3}{c^2 + c a + a^2}
+\geq
+    \frac{a+b+c}{3}
+\; . \end{equation*}
+
+%\item
+%Сумма положительных чисел $a$, $b$, $c$ и~$d$ равна 1.
+%Докажите неравенство
+%\[
+%    \frac{a^2}{a + b} + \frac{b^2}{b + c} +
+%    \frac{c^2}{c + d} + \frac{d^2}{d + a}
+%\geq
+%    \frac{1}{2}
+%\; . \]
+
+\item
+Произведение положительных чисел $a$, $b$ и~$c$ равно $1$.
+Докажите, что
+\begin{flalign*}
+& \subproblemmath
+    \frac{1}{a^3 (b + c)} + \frac{1}{b^3 (c + a)} + \frac{1}{c^3 (a + b)}
+\geq
+    \frac{3}{2}
+\; ; & \\
+& \subproblemmath
+    \frac{1}{a (a + 1)} + \frac{1}{b (b + 1)} + \frac{1}{c (c + 1)}
+\geq
+    \frac{3}{2}
+\; . & \end{flalign*}
+
+\item
+Сумма вещественных чисел $x_1, x_2, \ldots, x_n$ равна $0$.
+Обозначим через $m$ наименьшее, а~через $M$~--- наибольшее из~этих чисел.
+Докажите неравенства
+\begin{flalign*}
+& \subproblemmath
+    x_1^2 + x_2^2 + \ldots + x_n^2
+\leq
+    - n m M
+\, ; & \\
+& \subproblemmath
+    x_1^4 + x_2^4 + \ldots + x_n^4
+\leq
+    - n m M (m^2 + m M + M^2)
+\, . & \end{flalign*}
+
+\end{problems}
+

@@ -1,0 +1,110 @@
+% $date: 2015-06-18
+% $timetable:
+%   g10r2:
+%     2015-06-18:
+%       1:
+
+\section*{Неравенство Коши--Буняковского}
+
+% $authors:
+% - Александр Храбров
+
+%\claim{Неравенство Коши--Буняковского}
+Для любых вещественных чисел
+$x_1, x_2, \ldots, x_n, y_1, y_2, \ldots, y_n$ справедливо
+\emph{неравенство Коши--Буняковского:}
+\[
+    (x_1 y_1 + x_2 y_2 + \ldots + x_n y_n)^2
+\leq
+    (x_1^2 + x_2^2 + \ldots + x_n^2) \cdot
+    (y_1^2 + y_2^2 + \ldots + y_n^2)
+\, , \]
+причем если не~все $y_k$ равны нулю, то~равенство достигается тогда и~только
+тогда, когда
+\(
+    \frac{x_1}{y_1} = \frac{x_2}{y_2} = \ldots = \frac{x_n}{y_n}
+\)
+(здесь наличие нуля в~знаменателе означает, что над ним в~числителе также
+стоит ноль).
+
+\begin{problems}
+
+\item
+Пусть $p_1, p_2, \ldots, p_n$, $x_1, x_2, \ldots, x_n$ и~$r$~---
+положительные числа, причем числа $p_i$ в~сумме равны $1$.
+Докажите неравенство
+\[
+    (p_1 x_1^r + p_2 x_2^r + \ldots + p_n x_n^r)^2
+\leq
+    (p_1 x_1^{2r} + p_2 x_2^{2r} + \ldots + p_n x_n^{2r})
+\, . \]
+
+\item
+Пусть $a_1, a_2, \ldots, a_n, b_1, b_2, \ldots, b_n > 0$.
+Докажите, что
+\begin{flalign*}
+& \subproblemmath
+    (a_1 b_1 + a_2 b_2 + \ldots + a_n b_n)
+    \cdot
+    \left(
+        \frac{a_1}{b_1} + \frac{a_2}{b_2} +
+        \ldots +
+        \frac{a_n}{b_n}
+    \right)
+\geq
+    (a_1 + \ldots + a_n)^2
+\, ; & \\
+& \subproblemmath
+    \frac{a_1^2}{b_1} + \frac{a_2^2}{b_2} + \ldots + \frac{a_n^2}{b_n}
+\geq
+    \frac{(a_1 + a_2 + \ldots + a_n)^2}{b_1 + b_2 + \ldots + b_n}
+\; . & \end{flalign*}
+
+\item
+Для любых положительных чисел $x_1, x_2, \ldots, x_n$ докажите неравенство
+\[
+    (x_1^2 + \ldots + x_n^2)
+    \cdot
+    \left(
+        \frac{1}{x_1^2 + x_1 x_2} +
+        \frac{1}{x_2^2 + x_2 x_3} +
+        \ldots +
+        \frac{1}{x_n^2 + x_n x_1}
+    \right)
+\geq
+    \frac{n^2}{2}
+\; . \]
+
+\item
+Сумма положительных чисел $a$, $b$, $c$ и~$d$ равна 1.
+Докажите неравенство
+\[
+    \frac{a^2}{a + b} + \frac{b^2}{b + c} +
+    \frac{c^2}{c + d} + \frac{d^2}{d + a}
+\geq
+    \frac{1}{2}
+\; . \]
+
+\item
+Для положительных $a$, $b$ и~$c$ докажите неравенство
+\[
+    \frac{a^3}{a^2 + a b + b^2} +
+    \frac{b^3}{b^2 + b c + c^2} +
+    \frac{c^3}{c^2 + c a + a^2}
+\geq
+    \frac{a+b+c}{3}
+\; . \]
+
+\item
+Для любых положительных чисел $x_1, x_2, \ldots, x_n$, сумма которых равна 1,
+докажите неравенство
+\begin{equation*}
+    \frac{x_1}{2 - x_1} + \frac{x_2}{2 - x_2} +
+    \ldots +
+    \frac{x_n}{2 - x_n}
+\geq
+    \frac{n}{2 n - 1}.
+\end{equation*}
+
+\end{problems}
+

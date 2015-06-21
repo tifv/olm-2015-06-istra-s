@@ -8,7 +8,7 @@ announcement:
   $style[-announcement]:
   - .[announcement]
   $matter:
-  - - ../Mitrofanov/announcement
-  - - ../Nilov/announcement
-  - - ../Raigorodsky/announcement
+  - - ../Kanel/announcement
+  - - ../Khrabrov/announcement
   - - ../Shkredov/announcement
+  - - ../Treschev/announcement
