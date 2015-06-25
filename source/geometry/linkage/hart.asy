@@ -34,11 +34,6 @@ arc arcP = arc(circP, pP0, pP1);
 segment segQ = segment(inversion(pP0), inversion(pP1));
 line lineQ = line(segQ);
 
-clipdraw(circP, dashed);
-draw(arcP, important_pen);
-//draw(lineQ, dashed);
-draw(segQ, important_pen);
-
 draw(
     pA--pB--pD--pC--cycle ^^
     pS--pP,
@@ -48,6 +43,11 @@ draw(
 draw(line(pA, pD), dashed);
 draw(line(pB, pC), dashed);
 draw(line(pP, pQ), dashed);
+clipdraw(circP, dashed);
+//draw(lineQ, dashed);
+
+draw(arcP, important_pen);
+draw(segQ, important_pen);
 
 label("$A$", pA, SW);
 label("$B$", pB, NW);

@@ -4,7 +4,6 @@ announcement:
   $style[-announcement]:
   - .[announcement]
   $matter:
-  - - ../Mitrofanov/announcement
-  - - ../Nilov/announcement
-  - - ../Raigorodsky/announcement
-  - - ../Shkredov/announcement
+  - - ../Bakharev/announcement
+  - - ../Kushnir/announcement
+  - - ../Popelensky/announcement

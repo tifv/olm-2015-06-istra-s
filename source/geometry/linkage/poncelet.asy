@@ -27,11 +27,6 @@ arc arcA = arc(circA, pA0, pA1);
 segment segC = segment(inversion(pA0), inversion(pA1));
 line lineC = line(segC);
 
-draw(circA, dashed);
-draw(arcA, important_pen);
-//draw(lineC, dashed);
-draw(segC, important_pen);
-
 draw(
     pA--pB--pC--pD--cycle ^^
     pB--pO--pD ^^
@@ -40,6 +35,11 @@ draw(
 );
 
 draw(line(pO, pC), dashed);
+draw(circA, dashed);
+//draw(lineC, dashed);
+
+draw(arcA, important_pen);
+draw(segC, important_pen);
 
 label("$A$", pA, 2N);
 label("$B$", pB, NE);

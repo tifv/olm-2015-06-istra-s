@@ -2,7 +2,7 @@ import geometry;
 
 real size = 7cm;
 
-pen important_pen = gray(0.5) + linewidth(1.5);
+pen important_pen = gray(0.6) + linewidth(1.5);
 pen important_dot_pen = important_pen + linewidth(5);
 
 void important_dot(point p) {

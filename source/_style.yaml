@@ -1,7 +1,6 @@
 $build$compiler$default: pdflatex
 $style:
 - delegate: /_style
-- delegate: /_style/local
   condition: {not: no-style-local}
 - verbatim: |-
     \newcommand\jeolminstitutionname

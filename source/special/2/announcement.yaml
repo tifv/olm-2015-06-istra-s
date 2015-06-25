@@ -1,8 +1,4 @@
 announcement:
-  $groups$delegate$into: false
-  $groups$delegate: false
-  $groups$matter$into: false
-  $groups$matter: false
   $build$style[print]:
   - .[a6paper,landscape,resize-to]
   $style[-announcement]:
