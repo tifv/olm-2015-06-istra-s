@@ -43,7 +43,7 @@
 % $build$style[print,second-part]:
 % - .[a6paper,landscape,4-on-1]
 
-\begingroup
+\begingroup % \def\iffirstpart \def\ifsecondpart \def\additionalsection
 \providecommand{\iffirstpart}{\iftrue}
 \providecommand{\ifsecondpart}{\iftrue}
 
@@ -112,4 +112,6 @@
 \end{problems}
 
 \fi
+
+\endgroup % \def\iffirstpart \def\ifsecondpart \def\additionalsection
 

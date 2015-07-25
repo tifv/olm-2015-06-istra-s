@@ -1,0 +1,79 @@
+% $groups$delegate: false
+% $groups$delegate$into: false
+% $groups$matter: false
+% $groups$matter$into: false
+
+% $matter[-header,-no-header]:
+% - .[no-header]
+
+% $matter[-matter-guard,no-header]:
+% - verbatim: \begingroup \let\ifsourcelinks\iftrue
+%   condition: source-link
+% - .[matter-guard]
+% - verbatim: \endgroup % \let\ifsourcelinks
+%   condition: source-link
+
+\begingroup
+\providecommand\ifsourcelinks{\iffalse}
+\providecommand\url{\texttt}
+
+\strut
+
+\vfill
+
+\vfill
+
+\strut
+
+\clearpage
+
+
+\subsection*{Немного о~группах}
+
+Занятия проходили в шести группах:
+\begingroup\multicolsep=\parskip
+\begin{multicols}{3}
+9    <<Тираннозавры>>
+\\
+10-2 <<Трицератопсы>>
+\\
+10-1 <<Диплодоки>>
+\\
+11-2 <<Археоптериксы>>
+\\
+11-1 <<Птеродактили>>
+\\
+X    <<Аллозавры>>
+\end{multicols}
+\endgroup
+
+
+\subsection*{Немного о~структуре}
+
+Материалы разбиты по~группам, в~пределах каждой группы отсортированы по~темам:
+\begin{itemize}
+    \item \emph{тренировочные олимпиады;}
+    \item алгебра;
+    \begin{itemize}
+        \item теория чисел;
+        \item многочлены;
+        \item неравенства;
+    \end{itemize}
+    \item геометрия;
+    \item комбинаторика;
+    \begin{itemize}
+        \item теория графов.
+    \end{itemize}
+\end{itemize}
+
+Материалы, общие для нескольких групп, дублируются.
+\ifsourcelinks
+Все материалы сопровождаются ссылками на~исходные файлы \LaTeX.
+\fi
+
+
+\subsection*{Немного об~авторах}
+
+
+\endgroup
+

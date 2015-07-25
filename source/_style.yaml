@@ -6,8 +6,5 @@ $style:
     \newcommand\jeolminstitutionname
         {{\upshape[}\/Московские сборы по математике{\upshape\/]}}
     \newcommand\jeolmdaterange
-        {{\upshape[}\/15 июня -- 28 июня 2015{\upshape\/]}}
-
-_style:
-  $groups$delegate: false
+        {{\upshape[}\/15 июня --- 28 июня 2015{\upshape\/]}}
 

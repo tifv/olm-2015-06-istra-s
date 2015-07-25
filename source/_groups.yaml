@@ -49,6 +49,18 @@
     name: Птеродактили
     timetable: *common-timetable
 
+- $large$groups[gX]: true
+- $groups[gX]:
+    name: Тираннозавры
+    timetable: !!omap
+    - 2015-06-22: [1, 2]
+    - 2015-06-23: [1, 2]
+    - 2015-06-24: [1, 2]
+    - 2015-06-25: [1, 2]
+    - 2015-06-26: [1, 2]
+    - 2015-06-27: [1, 2]
+    - 2015-06-28: [1, 2]
+
 - $large$groups[gS]: true
 - $groups[gS]:
     name: Спецкурс

@@ -1,1 +1,49 @@
 $groups$matter: true
+
+Integral:
+  $groups$delegate: false
+  $groups$delegate$into: false
+  $groups$matter: false
+  $groups$matter$into: false
+
+  $style:
+  - document class: book
+    options: [10pt, a4paper]
+  - delegate: ..[no-document-class]
+
+  $matter[-add-toc]:
+  - .[add-toc]
+
+  $matter[-integral,add-toc]:
+
+  - error:
+      "'source-link' and 'print' options are incompatible"
+    condition: [source-link, print]
+
+  - preamble package: hyperref
+    condition: -print
+  - preamble verbatim: \hypersetup{colorlinks}
+    provide: hypersetup:colorlinks
+    condition: [source-link, -print]
+
+  - verbatim: \frontmatter
+  - - delegate: /integral[-add-toc]
+  - verbatim: \tableofcontents
+
+  - verbatim: \mainmatter
+  - delegate: .[integral]
+
+  $matter[integral]:
+  - verbatim: \chapter{Тираннозавры (9)}
+  - /[g9]
+  - verbatim: \chapter{Трицератопсы (10-2)}
+  - /[g10r2]
+  - verbatim: \chapter{Диплодоки (10-1)}
+  - /[g10r1]
+  - verbatim: \chapter{Археоптериксы (11-2)}
+  - /[g11r2]
+  - verbatim: \chapter{Птеродактили (11-1)}
+  - /[g11r1]
+  - verbatim: \chapter{Аллозавры (X)}
+  - /[gX]
+
