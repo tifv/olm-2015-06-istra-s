@@ -1,0 +1,25 @@
+!!omap
+
+- $matter[integral,g11r2]:
+  - - miscellany
+  - - monge-theorem
+
+- miscellany:
+    $groups$delegate$into: false
+    $groups$matter$into: false
+    $timetable:
+      g11r2:
+        2015-06-23: {}
+    $authors:
+    - Алексей Доледенок
+    $matter[g11r2,-no-header]:
+    - .[header]
+    $matter[g11r2,no-header]:
+    - ../main
+    - verbatim: \resetproblem
+    - ../more[contained]
+    $matter[g11r2,add-toc,no-header]:
+    - ../main
+    - verbatim: \resetproblem
+    - ../more[contained,-add-toc]
+

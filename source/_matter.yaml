@@ -26,9 +26,10 @@ Integral:
     provide: hypersetup:colorlinks
     condition: [source-link, -print]
 
-  - verbatim: \frontmatter
-  - - delegate: /integral[-add-toc]
-  - verbatim: \tableofcontents
+  # XXX
+  #- verbatim: \frontmatter
+  #- - delegate: /integral[-add-toc]
+  #- verbatim: \tableofcontents
 
   - verbatim: \mainmatter
   - delegate: .[integral]
