@@ -1,10 +1,8 @@
-$build$compiler$default: pdflatex
 $style:
 - delegate: /_style
-  condition: {not: no-style-local}
 - verbatim: |-
-    \newcommand\jeolminstitutionname
-        {{\upshape[}\/Московские сборы по математике{\upshape\/]}}
-    \newcommand\jeolmdaterange
-        {{\upshape[}\/15 июня --- 28 июня 2015{\upshape\/]}}
+    \renewcommand\jeolminstitution
+        {Московские сборы по математике}
+    \renewcommand\jeolmdaterange
+        {15--28 июня 2015}
 

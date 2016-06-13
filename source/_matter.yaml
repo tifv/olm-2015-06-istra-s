@@ -26,25 +26,67 @@ Integral:
     provide: hypersetup:colorlinks
     condition: [source-link, -print]
 
+  - verbatim: \frontmatter
   # XXX
-  #- verbatim: \frontmatter
   #- - delegate: /integral[-add-toc]
-  #- verbatim: \tableofcontents
+  - verbatim: \tableofcontents
 
   - verbatim: \mainmatter
   - delegate: .[integral]
 
   $matter[integral]:
-  - verbatim: \chapter{Тираннозавры (9)}
-  - /[g9]
-  - verbatim: \chapter{Трицератопсы (10-2)}
-  - /[g10r2]
-  - verbatim: \chapter{Диплодоки (10-1)}
-  - /[g10r1]
-  - verbatim: \chapter{Археоптериксы (11-2)}
-  - /[g11r2]
-  - verbatim: \chapter{Птеродактили (11-1)}
-  - /[g11r1]
-  - verbatim: \chapter{Аллозавры (X)}
-  - /[gX]
+  - delegate: g9
+  - delegate: g10r2
+  - delegate: g10r1
+  - delegate: g11r2
+  - delegate: g11r1
+  - delegate: gX
+
+  g9:
+    $matter:
+    - verbatim: \chapter{Тираннозавры (9)}
+      condition: {not: no-chapter}
+    - verbatim: \begin{jeolmlabelspace}{g9}
+    - delegate: /[g9]
+    - verbatim: \end{jeolmlabelspace}
+
+  g10r2:
+    $matter:
+    - verbatim: \chapter{Трицератопсы (10-2)}
+      condition: {not: no-chapter}
+    - verbatim: \begin{jeolmlabelspace}{g10r2}
+    - delegate: /[g10r2]
+    - verbatim: \end{jeolmlabelspace}
+
+  g10r1:
+    $matter:
+    - verbatim: \chapter{Диплодоки (10-1)}
+      condition: {not: no-chapter}
+    - verbatim: \begin{jeolmlabelspace}{g10r1}
+    - delegate: /[g10r1]
+    - verbatim: \end{jeolmlabelspace}
+
+  g11r2:
+    $matter:
+    - verbatim: \chapter{Археоптериксы (11-2)}
+      condition: {not: no-chapter}
+    - verbatim: \begin{jeolmlabelspace}{g11r2}
+    - delegate: /[g11r2]
+    - verbatim: \end{jeolmlabelspace}
+
+  g11r1:
+    $matter:
+    - verbatim: \chapter{Птеродактили (11-1)}
+      condition: {not: no-chapter}
+    - verbatim: \begin{jeolmlabelspace}{g11r1}
+    - delegate: /[g11r1]
+    - verbatim: \end{jeolmlabelspace}
+
+  gX:
+    $matter:
+    - verbatim: \chapter{Аллозавры (X)}
+      condition: {not: no-chapter}
+    - verbatim: \begin{jeolmlabelspace}{gX}
+    - delegate: /[gX]
+    - verbatim: \end{jeolmlabelspace}
 

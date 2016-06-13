@@ -8,25 +8,6 @@
 %
 % \fi
 %
-% \CheckSum{0}
-%
-% \CharacterTable
-%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
-%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
-%   Digits        \0\1\2\3\4\5\6\7\8\9
-%   Exclamation   \!     Double quote  \"     Hash (number) \#
-%   Dollar        \$     Percent       \%     Ampersand     \&
-%   Acute accent  \'     Left paren    \(     Right paren   \)
-%   Asterisk      \*     Plus          \+     Comma         \,
-%   Minus         \-     Point         \.     Solidus       \/
-%   Colon         \:     Semicolon     \;     Less than     \<
-%   Equals        \=     Greater than  \>     Question mark \?
-%   Commercial at \@     Left bracket  \[     Backslash     \\
-%   Right bracket \]     Circumflex    \^     Underscore    \_
-%   Grave accent  \`     Left brace    \{     Vertical bar  \|
-%   Right brace   \}     Tilde         \~}
-%
-%
 % \GetFileInfo{jeolm.sty}
 %
 % \title{The \textsf{jeolm} package}
@@ -35,8 +16,8 @@
 %
 % \maketitle
 %
-% \DoNotIndex{\def,\edef}
-% \DoNotIndex{\fi,\par,\z@}
+% \DoNotIndex{\let,\def,\edef}
+% \DoNotIndex{\fi,\par}
 % \DoNotIndex{\DeclareOption,\ProcessOptions,\RequirePackage}
 %
 % \section{Introduction}
@@ -49,14 +30,9 @@
 %
 % \subsection{Swap Greek variants}
 %
-% Command |\swapvargreek| allos one to exchange variant and normal greek
-% letters.
-% For example, |\swapvargreek{kappa}| will exchange |\kappa| and |\varkappa|.
-%
-% Package options
-% |swap-beta|, |swap-epsilon|, |swap-kappa|, |swap-phi|,
-% |swap-pi|, |swap-rho|, |swap-theta|, |swap-Theta|
-% will switch respective letters.
+% Command |\swapvar| allos one to exchange variant and normal greek letters.
+% For example, |\swapvar{kappa}| will exchange |\kappa| and |\varkappa|,
+% and |\swapvar[up]{phi}| will exchange |\upphi| and |\upvarphi|.
 %
 % \subsection{Figures}
 %
@@ -103,8 +79,8 @@
 % For |\problemy{2.3}|, mentioning next problem:
 % \ref{a problem} for |\ref{a problem}|.
 % \qquad
-% \problemyx{2a}{**}\label{a problem}%
-% For |\problemyx{2a}{**}\label{a problem}%|.
+% \problemyx{2a}{**}\label{a problem}\relax
+% For |\problemyx{2a}{**}\label{a problem}|.
 % \\
 % Macro |\problemyx|\marg{problem number}\marg{mark} combines features of
 % |\problemy| and |\problemx|.
@@ -121,13 +97,23 @@
 % \subproblemx{*}
 % for |\subproblemx{*}|.
 % \\
-% \subproblemy{m}\label{a subproblem}%
-% for |\subproblemy{m}\label{a subproblem}%|
+% \subproblem
+% for |\subproblem|.
+% \\
+% \subproblemy{m}\label{a subproblem}\relax
+% for |\subproblemy{m}\label{a subproblem}|
+% \\
+% \subproblemy{f}
+% for |\subproblemy{f}|
 % \\
 % \subproblemyx{n}{*}
 % for |\subproblemyx{n}{*}|.
 % \\
 % Mentioning previous subproblem: \ref{a subproblem} for |\ref{a subproblem}|.
+% \\
+% Mentioning previous subproblem without mentioning the problem number:
+% \subref{a subproblem} for |\subref{a subproblem}|.
+% This is useful for references within the problem.
 % \\
 % Macros |\sp| and |\spx| are corresponding |\let| aliases for |\subproblem|
 % and |\subproblemx|.
@@ -143,8 +129,8 @@
 % \begin{problems}
 % \item
 % For |\item|.
-% \item\label{some problem}%
-% For |\item\label{some problem}%|.
+% \item\label{some problem}\relax
+% For |\item\label{some problem}|.
 % \item
 % Mentioning previous problem: \ref{some problem} for |\ref{some problem}|.
 % \itemx{*}
@@ -157,8 +143,8 @@
 % \itemy{2.1}
 % For |\itemy{2.1}|, mentioning next problem:
 % \ref{another problem} for |\ref{another problem}|.
-% \itemyx{2.2}{*}\label{another problem}%
-% For |\itemyx{2.2}{*}\label{another problem}%|.
+% \itemyx{2.2}{*}\label{another problem}\relax
+% For |\itemyx{2.2}{*}\label{another problem}|.
 % \end{problems}
 %
 % \subsection{Statements}
@@ -181,7 +167,7 @@
 % These commands should be used outside of |problems| environment.
 % This way they will outstand from the problem list.
 %
-% \StopEventually{\newpage\PrintIndex}
+% \StopEventually{}
 %
 % \section{Implementation}
 %
@@ -213,19 +199,13 @@
 }
 %    \end{macrocode}
 %
-% Just convenient definitions.
-%    \begin{macrocode}
-\let\ov\overline
-\newcommand\divides{\mathrel{\vert}}
-%    \end{macrocode}
-%
 % Allow exchanging greek letters with their variants.
 %    \begin{macrocode}
-\newcommand\swapvargreek[1]{\begingroup
-\expandafter\let\expandafter\swap\csname #1\endcsname
-\expandafter\let\expandafter\varswap\csname var#1\endcsname
-\global\expandafter\let\csname #1\endcsname\varswap
-\global\expandafter\let\csname var#1\endcsname\swap
+\newcommand\swapvar[2][]{\begingroup
+\expandafter\let\expandafter\swap\csname #1#2\endcsname
+\expandafter\let\expandafter\varswap\csname #1var#2\endcsname
+\global\expandafter\let\csname #1#2\endcsname\varswap
+\global\expandafter\let\csname #1var#2\endcsname\swap
 \endgroup}
 %    \end{macrocode}
 %
@@ -238,6 +218,8 @@
 % \subsubsection{Centering-overlap}
 %
 % Provide |\clap| complement to the |\rlap| and |\llap| commands.
+% Implementation based on
+% \texttt{https://www.math.lsu.edu/~aperlis/publications/mathclap/}.
 %
 % For comparison, the existing overlap macros:
 %    \begin{verbatim}
@@ -258,72 +240,132 @@
 % Define |\clap|, |\rlap| and |\llap| equivalents for math mode (not
 % that they didn't work before).
 %    \begin{macrocode}
-\def\mathllap{\mathpalette\mathllapinternal}
-\def\mathrlap{\mathpalette\mathrlapinternal}
-\def\mathclap{\mathpalette\mathclapinternal}
-\def\mathllapinternal#1#2{%
+\def\mathllap{\mathpalette\@mathllap}
+\def\mathrlap{\mathpalette\@mathrlap}
+\def\mathclap{\mathpalette\@mathclap}
+\def\@mathllap#1#2{%
     \llap{$\mathsurround=0pt#1{#2}$}}
-\def\mathrlapinternal#1#2{%
+\def\@mathrlap#1#2{%
     \rlap{$\mathsurround=0pt#1{#2}$}}
-\def\mathclapinternal#1#2{%
+\def\@mathclap#1#2{%
     \clap{$\mathsurround=0pt#1{#2}$}}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
 % \end{macro}
 %
+%    \begin{macrocode}
+\newlength\@resizeto@width
+\newcommand\resizeto[2]{%
+\settowidth{\@resizeto@width}{#2}%
+\strut\hspace{0.5\@resizeto@width}%
+\clap{#1}%
+\hspace{0.5\@resizeto@width}\strut}
+\newcommand\mathresizeto[2]{\mathpalette{\@mathresizeto@unpack}{{#1}{#2}}}
+\def\@mathresizeto@unpack#1#2{\@mathresizeto@do{#1}#2}
+\def\@mathresizeto@do#1#2#3{%
+\settowidth{\@resizeto@width}{\mbox{$\mathsurround=0pt#1{#3}$}}%
+\mathstrut\hspace{0.5\@resizeto@width}%
+\mathclap{#2}%
+\hspace{0.5\@resizeto@width}\mathstrut}
+%    \end{macrocode}
+%
 % \subsection{Package options}
 %
 %    \begin{macrocode}
-\DeclareOption{swap-beta}{\swapvargreek{beta}}
-\DeclareOption{swap-epsilon}{\swapvargreek{epsilon}}
-\DeclareOption{swap-kappa}{\swapvargreek{kappa}}
-\DeclareOption{swap-phi}{\swapvargreek{phi}}
-\DeclareOption{swap-pi}{\swapvargreek{pi}}
-\DeclareOption{swap-rho}{\swapvargreek{rho}}
-\DeclareOption{swap-theta}{\swapvargreek{theta}}
-\DeclareOption{swap-Theta}{\swapvargreek{Theta}}
+\newif\ifjeolmfigure@lazy
+    \jeolmfigure@lazyfalse
+\DeclareOption{lazy-figures}{\jeolmfigure@lazytrue}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \ProcessOptions
 %    \end{macrocode}
 %
 % \subsection{Figures}
 %
 % \begin{macro}{\jeolmfiguremap}
-% \begin{macro}{\jeolmfigure}
 % Use the |\csname| to create a macro.
 % The set of such macros will define a mapping.
 %    \begin{macrocode}
 \newcommand\jeolmfiguremap[2]{%
 \expandafter\def\csname jeolmfiguremap@#1\endcsname{#2}}
-\newcommand\jeolmfigure[2][]{%
-\includegraphics[#1]{\csname jeolmfiguremap@#2\endcsname}}
 %    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\jeolmfigure}
+% The first variant of macro is not to be used in automatic environment.
+% Rather, it allows latexmk to catch up with all figures on second run.
+% (This implies that latexmk will be able to rebuild missing figures, like
+% from Asymptote source. Also, in this variant figures must be specified by
+% full name, with extension.)
+%    \begin{macrocode}
+\ifjeolmfigure@lazy
+    \newcommand\jeolmfigure[2][]{%
+        \edef\jeolmfigure@name{\csname jeolmfiguremap@#2\endcsname}%
+        \IfFileExists{\jeolmfigure@name}%
+            {\includegraphics[#1]{\jeolmfigure@name}}%
+            {\PackageWarning{jeolm}{file `\jeolmfigure@name' not found}}%
+    }
+%    \end{macrocode}
+% In automatic environment, where all figures are predictable and are
+% built in advance, second variant should be used instead.
+%    \begin{macrocode}
+\else
+    \newcommand\jeolmfigure[2][]{%
+        \includegraphics[#1]{\csname jeolmfiguremap@#2\endcsname}}
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Labels}
+%
+% \begin{macro}{\jeolmlabel}
+% \begin{macro}{\jeolmref}
+% \begin{macro}{\jeolmeqref}
+% \begin{environment}{jeolmlabelspace}
+% Redirect labels, allowing multiple inclusion of source files (provided that
+% these files use |\jeolmlabel| and |\jeolmref| instead of normal commands).
+%    \begin{macrocode}
+\newcommand\jeolmlabel[1]{\label{#1}}
+\newcommand\jeolmref[1]{\ref{#1}}
+\newcommand\jeolmeqref[1]{\eqref{#1}}
+\newenvironment{jeolmlabelspace}[1]{%
+    \renewcommand\jeolmlabel[1]{\label{#1:##1}}%
+    \renewcommand\jeolmref[1]{\ref{#1:##1}}%
+    \renewcommand\jeolmeqref[1]{\eqref{#1:##1}}%
+}{}
+%    \end{macrocode}
+% \end{environment}
 % \end{macro}
 % \end{macro}
 %
 % \subsection{Headers}
 %
-% \begin{macro}{\jeolmheadertemplate}
 % \begin{macro}{\jeolmheader}
 % Macro |\jeolmheader| is used by jeolm driver.
-% It is advised to define it as
-% |\jeolmheadertemplate|\marg{institution}\marg{daterange}\marg{group}.
+% If redefined, it must stay a macro without arguments.
 %    \begin{macrocode}
-\newcommand\jeolmheadertemplate[4]{\begingroup#4%
-    {\Large\vspace{4ex}}\par%
-    \begingroup\small\sffamily%
-        \strut\hfill{\bfseries#1}\hfill\strut\nopagebreak\\%
-        \strut\hfill{\itshape#2}\qquad{#3}%
-        \ifx\jeolmdate\relax\else\qquad{\itshape\jeolmdate}\fi%
-        \hfill\strut\nopagebreak\\%
-        \rule[1ex]{\textwidth}{0.5pt} %
+\newcommand\jeolmheader{%
+    \par\begingroup\small\sffamily%
+        \leavevmode\null\hfill%
+            {\bfseries\jeolminstitution}%
+        \hfill\null\\\null\hfill%
+            {\itshape\jeolmdaterange}%
+        \qquad
+            {\jeolmgroup}%
+        \ifx\jeolmdate\relax\else\qquad%
+            {\itshape\jeolmdate}%
+        \fi%
+        \hfill\null\\\rule[1ex]{\textwidth}{0.5pt}\linebreak[0]%
     \endgroup%
-    {\vspace{-1ex}\Large\vspace{-4ex}\vspace{-\parskip}}
-\endgroup}
+    \@nobreaktrue
+}
+\newcommand\jeolminstitution{Wherever}
+\newcommand\jeolmgroup{Whatever}
+\newcommand\jeolmdaterange{Whenever}
 \let\jeolmdate\relax
-\newcommand\jeolmheader[1]{}
 %    \end{macrocode}
-% \end{macro}
 % \end{macro}
 %
 % \subsection{Problem numbering}
@@ -425,15 +467,34 @@
 % Label of subproblem will include the number of problem.
 %    \begin{macrocode}
 \newcommand\thesubproblem{}
+\let\subproblem@label@problem\@empty
+\let\subproblem@label@paren\@gobble
 \newcommand\subproblem@label[1]{%
-    \global\edef\thesubproblem{{\theproblem}#1}%
+    \global\edef\thesubproblem{%
+        \string\subproblem@label@problem{\theproblem}%
+        \string\subproblem@label@paren(%
+        #1%
+        \string\subproblem@label@paren)}%
     \edef\@currentlabel{\thesubproblem}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\subref}
+% As the number of problem is enclosed in special command, by redefining that
+% command we can omit it.
+%    \begin{macrocode}
+\newcommand\subref[1]{\begingroup
+    \let\subproblem@label@paren\@empty
+    \let\subproblem@label@problem\@gobble
+    \ref{#1}%
+\endgroup}
 %    \end{macrocode}
 % \end{macro}
 %
 % \subsubsection{Formatting}
 %
 % \begin{macro}{\problem@format}
+% \begin{macro}{\problem@space}
 %    \begin{macrocode}
 \newlength\problem@space@length
 \problem@space@length=1em
@@ -443,8 +504,31 @@
 \endgroup}
 %    \end{macrocode}
 % \end{macro}
+% \end{macro}
+%
+%    \begin{macrocode}
+\newlength\@kernagainst@width
+\newlength\@kernagainst@width@a
+\newlength\@kernagainst@width@b
+\newlength\@kernagainst@width@c
+\newcommand\kernagainst[3]{%
+    \settowidth\@kernagainst@width@a{#2}%
+    \settowidth\@kernagainst@width@b{#1}%
+    \settowidth\@kernagainst@width@c{#3}%
+    \settowidth\@kernagainst@width{#2#1}%
+    \addtolength\@kernagainst@width{-\@kernagainst@width@a}%
+    \addtolength\@kernagainst@width{-\@kernagainst@width@b}%
+    \hspace{\@kernagainst@width}%
+    #1%
+    \settowidth\@kernagainst@width{#1#3}%
+    \addtolength\@kernagainst@width{-\@kernagainst@width@c}%
+    \addtolength\@kernagainst@width{-\@kernagainst@width@b}%
+    \hspace{\@kernagainst@width}%
+}
+%    \end{macrocode}
 %
 % \begin{macro}{\subproblem@format}
+% \begin{macro}{\subproblem@space}
 %    \begin{macrocode}
 \newlength\subproblem@space@length
 \newlength\@subproblem@letter@width
@@ -452,15 +536,10 @@
 \newcommand\subproblem@space{\hspace{\subproblem@space@length}\ignorespaces}
 \newcommand\subproblem@space@math{\mspace{20mu}}
 \newcommand\subproblem@format[2]{\text{\begingroup\bfseries
-\settowidth{\@subproblem@letter@width}{m}%
-(%
-    \hspace{0.5\@subproblem@letter@width}%
-    \clap{#1\rlap{#2}}%
-    \hspace{0.5\@subproblem@letter@width}%
-    \phantom{#2}%
-)%
+(\resizeto{\kernagainst{#1#2}{(}{)}}{\kernagainst{m#2}{(}{)}})%
 \endgroup}}
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 %
 % \begin{environment}{problems}

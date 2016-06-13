@@ -5,6 +5,6 @@ from jeolm.driver.source_link import SourceLinkDriver
 
 class Driver(GroupsDriver, AuthorsDriver, AddToCDriver, SourceLinkDriver):
 
-    def select_outname(self, target, metarecord, date=None):
-        return super().select_outname(target, metarecord, date=None)
+    def _select_outname(self, target, metarecord, date=None):
+        return super()._select_outname(target, metarecord, date=None)
 
